@@ -1,0 +1,37 @@
+dim: 10
+method: hutchinson
+experiment:
+  seed: 42
+  num_repetitions: 20
+diffusion:
+  beta: 1.0
+  t_lower: 0.01
+  t_upper: 1.0
+  t_factor: 0.5
+net:
+  type: repu
+  nd: 3
+  nw: 128
+  p: 2
+  leak: 0.1
+train:
+  lr: 0.001
+  num_iters: 20000
+  bs: 256
+  step: 5000
+  gamma: 0.5
+  log_step: 1000
+sampling:
+  sample_step: 500
+eva:
+  score_val_size: 512
+  score_test_size: 20000
+  w1_size_true: 5000
+  w1_size_gen: 5000
+  mmd_size_true: 5000
+  mmd_size_gen: 5000
+  w1_reg: 0.05
+  mmd_bandwidth: null
+model:
+  simple_matrix: false
+  alpha: 0.1

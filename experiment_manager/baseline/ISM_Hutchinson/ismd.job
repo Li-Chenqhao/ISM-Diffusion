@@ -1,0 +1,33 @@
+#!/bin/bash
+#SBATCH -J ismd_h
+#SBATCH -N 1
+#SBATCH -c 16
+#SBATCH --time=23:59:59
+#SBATCH --mem=32G
+#SBATCH --gres=gpu:1
+#SBATCH --array=0-2
+#SBATCH -e ismd_%A_%a.err
+#SBATCH -o ismd_%A_%a.out
+
+cd /users//ismd_h
+source /project/Stat/local/anaconda3-2025.12.sh
+conda activate albireo
+
+# Map array index to distribution
+if [ "$SLURM_ARRAY_TASK_ID" -eq 0 ]; then
+    DIST="polygon_gmm"
+elif [ "$SLURM_ARRAY_TASK_ID" -eq 1 ]; then
+    DIST="gauss_push"
+elif [ "$SLURM_ARRAY_TASK_ID" -eq 2 ]; then
+    DIST="energy_model"
+else
+    echo "Invalid task id"
+    exit 1
+fi
+
+CONFIG_ID=baseline_H
+
+echo "Running [Job ID]: $SLURM_JOB_ID, [Task ID]: $SLURM_ARRAY_TASK_ID, [Distribution]: $DIST, [Config ID]: $CONFIG_ID"
+python3 ISM_Diffusion.py --distribution "$DIST" --id "$CONFIG_ID"
+
+conda deactivate
