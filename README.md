@@ -23,7 +23,7 @@ After installing Anaconda, create and activate an environment named `albireo`:
 conda create -n albireo python=3.12 numpy scipy matplotlib pyyaml pip
 conda activate albireo
 
-python -m pip install torch==2.7.* --index-url https://download.pytorch.org/whl/cu128
+python -m pip install "torch==2.7.*" --index-url https://download.pytorch.org/whl/cu128
 python -m pip install "pot>=0.9.1,<0.10"
 ```
 
