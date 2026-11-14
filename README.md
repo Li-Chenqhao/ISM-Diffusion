@@ -1,5 +1,5 @@
 # Implicit score matching-based diffusion models (ISM-Diffusion)
-![Image](ismd.png)
+![Image](ismd_logo.png)
 
 This repository contains the code for the numerical experiments in the paper 
 
